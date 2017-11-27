@@ -5,9 +5,9 @@ import java.awt.event.ActionListener;
 
 public class GameHandler 
 {
-	private static final GameWindow WINDOW = new GameWindow();
-	private static final Scene SCENE = new Scene();
-	private static final Information INFO = new Information(WINDOW.getInformationText());
+	private static final GameWindow WINDOW = new GameWindow();	// Create JFrame.
+	private static final Scene SCENE = new Scene(WINDOW.getInformationText());	// Create game scene.
+	private static final Player PLAYER = new Player(SCENE);	// Create player and pass the scene.
 	
 	/**
 	 * Launch the application.
@@ -21,6 +21,7 @@ public class GameHandler
 				{
 					WINDOW.getFrame().setVisible(true);
 					createActionListeners();
+					WINDOW.setSceneImage(SCENE.getScene()); // Set start image.
 				} 
 				catch (Exception e) 
 				{
@@ -44,7 +45,8 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
-				
+				PLAYER.moveForward();
+				WINDOW.setSceneImage(SCENE.getScene());
 			}
 			
 		});
@@ -58,7 +60,8 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
-				INFO.writeInformation("Left");
+				PLAYER.turnLeft();
+				WINDOW.setSceneImage(SCENE.getScene());
 			}
 			
 		});
@@ -72,7 +75,8 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
-				System.out.println("BUTTON RIGHT!");
+				PLAYER.turnRight();
+				WINDOW.setSceneImage(SCENE.getScene());
 			}
 			
 		});
@@ -86,7 +90,8 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
-				System.out.println("BUTTON BACK!");
+				PLAYER.moveBack();
+				WINDOW.setSceneImage(SCENE.getScene());
 			}
 			
 		});
@@ -100,7 +105,6 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
-				System.out.println("BUTTON PICKUP!");
 			}
 			
 		});

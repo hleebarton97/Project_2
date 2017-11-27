@@ -1,5 +1,4 @@
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -32,21 +31,23 @@ import java.awt.Rectangle;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.ImageIcon;
 
 public class GameWindow {
 
 	private JFrame frame;
 	
-	ImageContainer scene;
+	private JLabel bg;
+	private ImageIcon ii;
 	
-	JPanel panel_Information, 
+	private JPanel panel_Information, 
 		   panel_Inventory, 
 		   panel_Buttons;
 	
-	JTextPane txt_Information;
+	private JTextPane txt_Information;
 	
 	
-	JButton btn_PickUp,
+	private JButton btn_PickUp,
 		    btn_Forward,
 		    btn_Back,
 		    btn_Left,
@@ -71,10 +72,6 @@ public class GameWindow {
 		frame.setResizable(false);
 		frame.setTitle("The Mansion");
 		
-		this.scene = new ImageContainer();
-		scene.setBounds(10, 11, 350, 300);
-		frame.getContentPane().add(scene);
-		
 		this.panel_Information = new JPanel();
 		panel_Information.setBounds(370, 11, 204, 300);
 		frame.getContentPane().add(panel_Information);
@@ -86,6 +83,8 @@ public class GameWindow {
 		txt_Information.setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		txt_Information.setBounds(10, 29, 184, 260);
 		panel_Information.add(txt_Information);
+		
+		this.bg = new JLabel();
 		
 		JLabel lbl_Information = new JLabel("Information");
 		lbl_Information.setHorizontalAlignment(SwingConstants.CENTER);
@@ -187,14 +186,6 @@ public class GameWindow {
 	
 	
 // JPanel Getters
-	/**
-	 * 
-	 * @return
-	 */
-	public ImageContainer getScene()
-	{
-		return this.scene;
-	}
 	
 	/**
 	 * 
@@ -279,6 +270,17 @@ public class GameWindow {
 	public JButton getBtnBack()
 	{
 		return this.btn_Back;
+	}
+	
+	/**
+	 * 
+	 * @param img
+	 */
+	public void setSceneImage(BufferedImage img)
+	{
+		this.bg.setBounds(10, 11, 350, 300); // Set image bounds and size.
+		this.bg.setIcon(new ImageIcon(img)); // Set the background of JLabel.
+		this.frame.getContentPane().add(bg); // Add JLabel to our game window.
 	}
 
 }

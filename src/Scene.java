@@ -10,7 +10,10 @@
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
+import javax.swing.JTextPane;
 
 public class Scene 
 {
@@ -18,24 +21,32 @@ public class Scene
 	private int dir;			 // The direction the player is facing at node position (0 - 3).
 	private BufferedImage scene; // Actual image of the scene.
 	
+	private Information info;	 // The information provided for each scene.
+	
+	private ArrayList<Room> rooms; // ArrayList of the 7 rooms.
+	
 	/**
 	 * Constructor that doesn't take a node value and sets the scene
 	 * at the start.
 	 */
-	public Scene()
+	public Scene(JTextPane windowText)
 	{
-		this.setNode(0);
-		this.setDirection(0);
+		this.setNode(0); 		 		// Default node position at 0.
+		this.setDirection(0);	 		// Default direction at 0.
+		this.info = new Information(windowText); // Create information object.
+		createRooms(); // Create room objects.
 	}
 	
 	/**
 	 * Constructor that takes in a node value and sets the scene.
-	 * @param node, dir
+	 * @param node, dir, JTextPane
 	 */
-	public Scene(int node, int dir)
+	public Scene(int node, int dir, JTextPane windowText)
 	{
-		this.setNode(node);
-		this.setDirection(dir);
+		this.setNode(node);				// Set node position.
+		this.setDirection(dir);			// Set dir.
+		this.info = new Information(windowText); // Create information object.
+		createRooms(); // Create room objects.
 	}
 
 	
@@ -104,6 +115,36 @@ public class Scene
 	}
 
 // Functions
+	
+	/**
+	 * 
+	 */
+	public void createRooms()
+	{
+		rooms = new ArrayList<Room>();	// Initialize rooms ArrayList.
+		
+		Room lounge = new Room("Lounge");
+		Room billiard = new Room("Billiard Room");
+		Room library = new Room("Library");
+		Room study = new Room("Study");
+		Room ballroom = new Room("Ballroom");
+		Room kitchen = new Room("Kitchen");
+		Room conservatory = new Room("Conservatory");
+		
+		this.rooms.add(lounge);
+		this.rooms.add(billiard);
+		this.rooms.add(library);
+		this.rooms.add(study);
+		this.rooms.add(ballroom);
+		this.rooms.add(kitchen);
+		this.rooms.add(conservatory);
+	}
+	
+	public void printNodeDir()
+	{
+		System.out.println("Position: " + this.node + ", Dir: " + this.dir);
+	}
+	
 	/**
 	 * Load an image and set this.scene to the loaded image
 	 * based on the player's position (this.node).
@@ -115,6 +156,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_0_Mansion.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -127,6 +169,7 @@ public class Scene
 			try 
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_1_0_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -139,6 +182,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_1_1_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -151,6 +195,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_1_2_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -163,6 +208,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_1_3_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -174,7 +220,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_2_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_2_Lounge.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -187,6 +234,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_3_0_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -199,6 +247,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_3_1_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -211,6 +260,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_3_2_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -223,6 +273,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_3_3_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -234,7 +285,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_4_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_4_Study.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -246,7 +298,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_5_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_5_Ballroom.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -259,6 +312,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_6_0_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -271,6 +325,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_6_1_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -283,6 +338,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_6_2_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -295,6 +351,7 @@ public class Scene
 			try
 			{
 				this.scene = ImageIO.read(new File("src/assets/img", "node_6_3_Hallway.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -306,7 +363,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_7_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_7_Billiard.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -318,7 +376,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_8_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_8_Library.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -330,7 +389,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_9_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_9_Conservatory.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{
@@ -342,7 +402,8 @@ public class Scene
 		{
 			try
 			{
-				this.scene = ImageIO.read(new File("src/assets/img", "node_10_Hallway.png"));
+				this.scene = ImageIO.read(new File("src/assets/img", "node_10_Kitchen.png"));
+				this.printNodeDir();
 			}
 			catch(IOException e)
 			{

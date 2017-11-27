@@ -52,5 +52,13 @@ public class Information
     {
         this.infoPane.setText(info);
     }
+    
+
+// Functions:
+    
+    public void readInfoFromFile()
+    {
+    	
+    }
 
 }
