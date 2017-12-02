@@ -11,17 +11,25 @@
 3:0:0:You walk further down the hall. There are two more doors to your right and to your left.
 3:1:0:You turn to face the door next to you. The door is locked.
 3:1:1:You turn to face the Billiard Room.
-3:2:0:You turn to face the door next to you. The door is locked.
+3:2:0:You turn to face the door next to you. The door is locked, but has a keypad on it.
 3:2:1:You turn to face the Ballroom.
 3:3:0:You turn to face the entrance at the end of the hallway.
 4:0:0:You enter the Study. You notice a note on the table. There are strange numbers written on the note.
 4:0:1:You enter the Study. You found the note here.
-5:0:0:
-6:0:0:
-6:1:0:
-6:2:0:
-6:3:0:
-7:0:0:
-8:0:0:
-9:0:0:
-10:0:0:
+5:0:0:You enter the Ballroom. You see a fancy looking key in an open safe.
+5:0:1:You enter the Ballroom. You found a key in the safe here.
+6:0:0:You are facing a locked door.
+6:0:1:You are facing the Conservatory.
+6:1:0:You turn to face the door next to you. The room is too dark to enter.
+6:1:1:You turn to face the Library.
+6:2:0:You turn to face the door next to you. The door is locked.
+6:2:1:You turn to face the Kitchen.
+6:3:0:You turn to face the entrance at the end of the hallway.
+7:0:0:You enter the Billiard Room. There is a candle in the middle of the billiard table.
+7:0:1:You enter the Billiard Room. You picked up the candle here.
+8:0:0:You enter the Library. Your candle lights up the room. You are able to see a button on a desk.
+8:0:1:You enter the Library. You found the button here.
+9:0:0:You enter the Conservatory. There is a lever on the back wall. You should pull it.
+9:0:1:You enter the Conservatory. You discovered the lever on the back wall.
+10:0:0:You enter the Kitchen. There is a key with a skull on its end.
+10:0:1:You enter the kitchen. You discovered the master key here.

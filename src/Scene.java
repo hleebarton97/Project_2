@@ -11,7 +11,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
 import javax.swing.JTextPane;
 
@@ -36,7 +35,7 @@ public class Scene
 		this.setDirection(0);	 		// Default direction at 0.
 		this.setType(0);				// Default type of information.
 		this.info = new Information(windowText); // Create information object.
-		createRooms(); // Create room objects.
+		this.createRooms(); // Create room objects.
 	}
 	
 	/**
@@ -49,7 +48,7 @@ public class Scene
 		this.setDirection(dir);			// Set dir.
 		this.setType(0);				// Set type.
 		this.info = new Information(windowText); // Create information object.
-		createRooms(); // Create room objects.
+		this.createRooms(); // Create room objects.
 	}
 
 	
@@ -89,6 +88,16 @@ public class Scene
 	public BufferedImage getScene()
 	{
 		return this.scene;
+	}
+	
+	/**
+	 * Get the information of the scene.
+	 * 
+	 * @return information
+	 */
+	public Information getInfo()
+	{
+		return this.info;
 	}
 
 	
@@ -150,10 +159,51 @@ public class Scene
 		{
 			if(this.dir == 0 && this.getRoomByName("Hallway").hasEntered())
 				this.setType(1);
-			else if(this.dir == 2 && this.getRoomByName("Study").isLocked()) // Study is unlocked.
+			else if(this.dir == 2 && this.getRoomByName("Study").hasEntered()) // Study is unlocked.
 				this.setType(1);
 			else
 				this.setType(0);	
+		}
+		else if(node == 2) // Check Lounge.
+		{
+			if(this.getRoomByName("Lounge").getItem().isPickedUp())
+				this.setType(1);
+			else
+				this.setType(0);
+		}
+		else if(node == 3) // Check NODE 3 type.
+		{
+			if(this.dir == 1 && this.getRoomByName("Billiard Room").hasEntered())
+				this.setType(1);
+			else if(this.dir == 2 && this.getRoomByName("Ballroom").hasEntered())
+				this.setType(1);
+			else
+				this.setType(0);
+		}
+		else if(node == 4) // Check Study.
+		{
+			if(this.getRoomByName("Study").getItem().isPickedUp())
+				this.setType(1);
+			else
+				this.setType(0);
+		}
+		else if(node == 5) // Check Ballroom.
+		{
+			if(this.getRoomByName("Ballroom").getItem().isPickedUp())
+				this.setType(1);
+			else
+				this.setType(0);
+		}
+		else if(node == 6) // Check NODE 6 type.
+		{
+			if(this.dir == 0 && this.getRoomByName("Conservatory").hasEntered())
+				this.setType(1);
+			else if(this.dir == 1 && this.getRoomByName("Library").hasEntered())
+				this.setType(1);
+			else if(this.dir == 2 && this.getRoomByName("Kitchen").hasEntered())
+				this.setType(1);
+			else
+				this.setType(0);
 		}
 		else
 			this.setType(0);
@@ -161,6 +211,11 @@ public class Scene
 		this.info.updateInformation(node, dir, this.type);
 	}
 	
+	/**
+	 * 
+	 * @param name
+	 * @return
+	 */
 	public Room getRoomByName(String name)
 	{
 		for(Room room : this.rooms)
@@ -171,6 +226,30 @@ public class Scene
 		return null;
 	}
 	
+	public Room getRoomByPosition()
+	{
+		if(this.node == 2)
+			return this.getRoomByName("Lounge");
+		else if(this.node == 4)
+			return this.getRoomByName("Study");
+		else if(this.node == 5)
+			return this.getRoomByName("Ballroom");
+		else if(this.node == 7)
+			return this.getRoomByName("Billiard Room");
+		else if(this.node == 8)
+			return this.getRoomByName("Library");
+		else if(this.node == 9)
+			return this.getRoomByName("Conservatory");
+		else if(this.node == 10)
+			return this.getRoomByName("Kitchen");
+		else
+			return this.getRoomByName("Hallway");
+	}
+	
+	/**
+	 * 
+	 * @param node
+	 */
 	public void updateRoom(int node)
 	{
 		if(node == 1)
@@ -193,29 +272,55 @@ public class Scene
 	}
 	
 	/**
-	 * 
+	 * Create the rooms and add the items within the rooms.
 	 */
 	public void createRooms()
 	{
 		rooms = new ArrayList<Room>();	// Initialize rooms ArrayList.
 		
 		Room lounge = new Room("Lounge");
-		Room billiard = new Room("Billiard Room");
-		Room library = new Room("Library");
-		Room study = new Room("Study");
-		Room ballroom = new Room("Ballroom");
-		Room kitchen = new Room("Kitchen");
-		Room conservatory = new Room("Conservatory");
+		Room billiard = new Room("Billiard Room", true); 	// Locked
+		Room library = new Room("Library", true); 			// Locked
+		Room study = new Room("Study", true); 				// Locked
+		Room ballroom = new Room("Ballroom", true);			// Locked
+		Room kitchen = new Room("Kitchen", true);			// Locked
+		Room conservatory = new Room("Conservatory", true); // Locked
 		Room hallway = new Room("Hallway");
 		
+		/**
+		 * Add rooms to ArrayList and add items to each room.
+		 */
 		this.rooms.add(lounge);
+		this.getRoomByName("Lounge").setItemName("Key");
+		this.getRoomByName("Lounge").setItemType(4);
+		
 		this.rooms.add(billiard);
+		this.getRoomByName("Billiard Room").setItemName("Candle");
+		this.getRoomByName("Billiard Room").setItemType(8);
+		
 		this.rooms.add(library);
+		this.getRoomByName("Library").setItemName("Button");
+		this.getRoomByName("Library").setItemType(10);
+		
 		this.rooms.add(study);
+		this.getRoomByName("Study").setItemName("Note");
+		this.getRoomByName("Study").setItemType(5);
+		
 		this.rooms.add(ballroom);
+		this.getRoomByName("Ballroom").setItemName("Fancy Key");
+		this.getRoomByName("Ballroom").setItemType(7);
+		
 		this.rooms.add(kitchen);
+		this.getRoomByName("Kitchen").setItemName("Master Key");
+		this.getRoomByName("Kitchen").setItemType(9);
+		
 		this.rooms.add(conservatory);
+		this.getRoomByName("Conservatory").setItemName("Lever");
+		this.getRoomByName("Conservatory").setItemType(0);
+		
 		this.rooms.add(hallway);
+		this.getRoomByName("Hallway").setItem(null);
+		
 	}
 	
 	public void printNodeDir()

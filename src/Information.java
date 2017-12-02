@@ -114,7 +114,7 @@ public class Information
     }
     
     /**
-     * Update information pane based on 
+     * Update information pane based on node, direction, and type.
      * @param node
      * @param dir
      */

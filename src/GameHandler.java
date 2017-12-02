@@ -1,3 +1,15 @@
+/**
+ * Game Handler class contains the main method.
+ * 
+ * This class creates the JFrame game window that contains all the window components.
+ * Creates the scene and player, which takes the game scene.
+ * 
+ * All button actions are handled here.
+ * 
+ * @authors Henry Lee Barton III, Jake Garcia, Lupe Garcia, Ryan Hallberg
+ * @since 12/6/2017
+ */
+
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -106,6 +118,7 @@ public class GameHandler
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{	
+				PLAYER.pickUp();
 			}
 			
 		});

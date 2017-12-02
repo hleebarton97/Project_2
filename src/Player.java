@@ -17,7 +17,7 @@ public class Player
 	 */
     public Player(Scene scene)
     {
-        this.items = null;
+        this.items = new ArrayList<Item>();
         this.scene = scene;
     }
     
@@ -74,23 +74,54 @@ public class Player
     	else if(this.scene.getNode() == 1 && this.scene.getDirection() == 1) // NODE 1 FACING LOUNGE (LEFT).
     		this.scene.updateScene(2, 0);
     	else if(this.scene.getNode() == 1 && this.scene.getDirection() == 2) // NODE 1 FACING STUDY (RIGHT).
-    		this.scene.updateScene(4, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Study").isLocked())) // If the room is unlocked.
+    			this.scene.updateScene(4, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The door is locked.");
+    	}
     	//else if(this.scene.getNode() == 1 && this.scene.getDirection() == 3) // NODE 1 FACING ENTRANCE (BACK).
     		// Can't move.
     	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 0) // NODE 3 FACING FORWARD.
     		this.scene.updateScene(6, 0);
     	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 1) // NODE 3 FACING BILLIARD ROOM (LEFT).
-    		this.scene.updateScene(7, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Billiard Room").isLocked())) // If the room is unlocked.
+    			this.scene.updateScene(7, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The door is locked.");
+    	}
     	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 2) // NODE 3 FACING BALLROOM (RIGHT).
-    		this.scene.updateScene(5, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Billiard Room").isLocked())) // If the room is unlocked.
+    			this.scene.updateScene(5, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The door is locked.");
+    			
+    	}
     	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 3) // NODE 3 FACING NODE 1 (BACK).
     		this.scene.updateScene(1, 3);
     	else if(this.scene.getNode() == 6 && this.scene.getDirection() == 0) // NODE 6 FACING CONSERVATORY (FORWARD).
-    		this.scene.updateScene(9, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Conservatory").isLocked())) // If the room is unlocked.
+    			this.scene.updateScene(9, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The door is locked.");
+    	}
     	else if(this.scene.getNode() == 6 && this.scene.getDirection() == 1) // NODE 6 FACING LIBRARY (LEFT).
-    		this.scene.updateScene(8, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Library").isLocked()))
+    			this.scene.updateScene(8, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The room is too dark to enter.");
+    	}
     	else if(this.scene.getNode() == 6 && this.scene.getDirection() == 2) // NODE 6 FACING KITCHEN (RIGHT).
-    		this.scene.updateScene(10, 0);
+    	{
+    		if(!(this.scene.getRoomByName("Kitchen").isLocked()))
+    			this.scene.updateScene(10, 0);
+    		else
+    			this.scene.getInfo().writeInformation("The door is locked.");
+    	}
     	else if(this.scene.getNode() == 6 && this.scene.getDirection() == 3) // NODE 6 FACING NODE 3 (BACK).
     		this.scene.updateScene(3, 3);
     }
@@ -196,6 +227,21 @@ public class Player
      */
     public void pickUp()
     {
+    	// Get room player is in.
+    	Room room = this.scene.getRoomByPosition();
     	
+    	// If the player is not in the hallway.
+    	if(!(room.getName().equals("Hallway")))
+    	{
+    		// If item has not been picked up, then pick it up.
+    		if(!(room.getItem().isPickedUp()))
+    		{
+	    		// Add item to player's inventory.
+	    		this.items.add(room.getItem());
+	    		
+	    		// Item has now been picked up.
+	    		room.getItem().setPickedUp(true);
+    		}
+    	}
     }
 }
