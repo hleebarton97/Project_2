@@ -8,15 +8,24 @@ import java.util.ArrayList;
 
 public class Player
 {
-	private ArrayList<Item> items;
-	private Scene scene;
+	private ArrayList<Item> items;	// Items in player's inventory.
+	private Scene scene;	// Scene player is current on.
     
+	/**
+	 * 
+	 * @param scene
+	 */
     public Player(Scene scene)
     {
         this.items = null;
         this.scene = scene;
     }
     
+    /**
+     * 
+     * @param items
+     * @param scene
+     */
     public Player(ArrayList<Item> items, Scene scene)
     {
     	this.setItems(items);
@@ -26,19 +35,30 @@ public class Player
     
 // Getters: 
     
+    /**
+     * 
+     * @return
+     */
     public ArrayList<Item> getItems()
     {
         return this.items;
     }
     
+    
 // Setters:
     
+    /**
+     * 
+     * @param items
+     */
     public void setItems(ArrayList<Item> items)
     {
     	this.items = items;
     }
     
+    
 // Actions:
+    
     /**
      * Player moves forward based on current position and direction.
      */

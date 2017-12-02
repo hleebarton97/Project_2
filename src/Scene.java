@@ -17,13 +17,14 @@ import javax.swing.JTextPane;
 
 public class Scene 
 {
-	private int node;			 // The digit value of the scene the player is currently on (0 - 10).
-	private int dir;			 // The direction the player is facing at node position (0 - 3).
-	private BufferedImage scene; // Actual image of the scene.
+	private int node;			 	// The digit value of the scene the player is currently on (0 - 10).
+	private int dir;			 	// The direction the player is facing at node position (0 - 3).
+	private int type; 				// Handles different information at the same node and direction.
+	private BufferedImage scene; 	// Actual image of the scene.
 	
-	private Information info;	 // The information provided for each scene.
+	private Information info;	 	// The information provided for each scene.
 	
-	private ArrayList<Room> rooms; // ArrayList of the 7 rooms.
+	private ArrayList<Room> rooms; 	// ArrayList of the 8 rooms.
 	
 	/**
 	 * Constructor that doesn't take a node value and sets the scene
@@ -33,6 +34,7 @@ public class Scene
 	{
 		this.setNode(0); 		 		// Default node position at 0.
 		this.setDirection(0);	 		// Default direction at 0.
+		this.setType(0);				// Default type of information.
 		this.info = new Information(windowText); // Create information object.
 		createRooms(); // Create room objects.
 	}
@@ -45,6 +47,7 @@ public class Scene
 	{
 		this.setNode(node);				// Set node position.
 		this.setDirection(dir);			// Set dir.
+		this.setType(0);				// Set type.
 		this.info = new Information(windowText); // Create information object.
 		createRooms(); // Create room objects.
 	}
@@ -68,6 +71,15 @@ public class Scene
 	public int getDirection()
 	{
 		return this.dir;
+	}
+	
+	/**
+	 * Get the current type of information that is being displayed.
+	 * @return
+	 */
+	public int getType()
+	{
+		return this.type;
 	}
 	
 	/**
@@ -103,6 +115,15 @@ public class Scene
 	}
 	
 	/**
+	 * Set the value of type.
+	 * @param type
+	 */
+	public void setType(int type)
+	{
+		this.type = type;
+	}
+	
+	/**
 	 * Update player's current direction and position.
 	 * @param node
 	 * @param dir
@@ -111,10 +132,65 @@ public class Scene
 	{
 		this.node = node;
 		this.dir = dir;
+		this.setInformation(node, dir);
+		this.updateRoom(node);
 		this.loadImage();
 	}
 
 // Functions
+	
+	/**
+	 * Set the appropriate information based on multiple variables.
+	 * @param node
+	 * @param dir
+	 */
+	public void setInformation(int node, int dir)
+	{
+		if(node == 1) // Check NODE 1 type.
+		{
+			if(this.dir == 0 && this.getRoomByName("Hallway").hasEntered())
+				this.setType(1);
+			else if(this.dir == 2 && this.getRoomByName("Study").isLocked()) // Study is unlocked.
+				this.setType(1);
+			else
+				this.setType(0);	
+		}
+		else
+			this.setType(0);
+		
+		this.info.updateInformation(node, dir, this.type);
+	}
+	
+	public Room getRoomByName(String name)
+	{
+		for(Room room : this.rooms)
+		{
+			if(room.getName().equals(name))
+				return room;
+		}
+		return null;
+	}
+	
+	public void updateRoom(int node)
+	{
+		if(node == 1)
+			this.getRoomByName("Hallway").setHasEntered(true);
+		else if(node == 2)
+			this.getRoomByName("Lounge").setHasEntered(true);
+		else if(node == 4)
+			this.getRoomByName("Study").setHasEntered(true);
+		else if(node == 5)
+			this.getRoomByName("Ballroom").setHasEntered(true);
+		else if(node == 7)
+			this.getRoomByName("Billiard Room").setHasEntered(true);
+		else if(node == 8)
+			this.getRoomByName("Library").setHasEntered(true);
+		else if(node == 9)
+			this.getRoomByName("Conservatory").setHasEntered(true);
+		else if(node == 10)
+			this.getRoomByName("Kitchen").setHasEntered(true);
+		
+	}
 	
 	/**
 	 * 
@@ -130,6 +206,7 @@ public class Scene
 		Room ballroom = new Room("Ballroom");
 		Room kitchen = new Room("Kitchen");
 		Room conservatory = new Room("Conservatory");
+		Room hallway = new Room("Hallway");
 		
 		this.rooms.add(lounge);
 		this.rooms.add(billiard);
@@ -138,6 +215,7 @@ public class Scene
 		this.rooms.add(ballroom);
 		this.rooms.add(kitchen);
 		this.rooms.add(conservatory);
+		this.rooms.add(hallway);
 	}
 	
 	public void printNodeDir()

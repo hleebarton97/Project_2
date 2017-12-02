@@ -1,3 +1,9 @@
+/**
+ * 
+ * @author hleeb
+ *
+ */
+
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Color;
@@ -264,6 +270,7 @@ public class GameWindow {
 	}
 	
 	/**
+	 * Gets the back button from the JFrame.
 	 * 
 	 * @return
 	 */
@@ -273,6 +280,7 @@ public class GameWindow {
 	}
 	
 	/**
+	 * Sets the image of the current scene.
 	 * 
 	 * @param img
 	 */

@@ -1,6 +1,27 @@
-0:0:You arrive at the Mansion and you are facing the front door.  The entrance light is on, but it does not seem like anybody is home.  You look closely to find the front door to be cracked open.
-1:0:You enter the Mansion.  The door behind you suddenly closes and locks.  You are filled with dread and a sudden loss of hope.  You must escape.  You are in a hall with many doors surrounding you.
-1:1:
-1:2:
-1:3:
-2:0:
+0:0:0:You arrive at the Mansion and you are facing the front door.  The entrance light is on, but it does not seem like anybody is home.  You look closely to find the front door to be cracked open.
+1:0:0:You enter the Mansion.  The door behind you suddenly closes and locks.  You are filled with dread and a sudden loss of hope.  You must escape.  You are in a hall with many doors surrounding you.
+1:0:1:You are facing the end of the hallway. Many doors surround you.
+1:1:0:You turn to face the door next to you. The door is cracked open. It appears to be the Lounge.
+1:2:0:You turn to face the door next to you. The door is locked.
+1:2:1:You turn to face the Study.
+1:3:0:You turn to face the entrance, but the door is locked. You are not able to leave.
+1:3:1:The door is unlocked! It looks like you can leave.
+2:0:0:You enter the Lounge. You notice a key on the floor.
+2:0:1:You enter the Lounge. You picked up a key from here.
+3:0:0:You walk further down the hall. There are two more doors to your right and to your left.
+3:1:0:You turn to face the door next to you. The door is locked.
+3:1:1:You turn to face the Billiard Room.
+3:2:0:You turn to face the door next to you. The door is locked.
+3:2:1:You turn to face the Ballroom.
+3:3:0:You turn to face the entrance at the end of the hallway.
+4:0:0:You enter the Study. You notice a note on the table. There are strange numbers written on the note.
+4:0:1:You enter the Study. You found the note here.
+5:0:0:
+6:0:0:
+6:1:0:
+6:2:0:
+6:3:0:
+7:0:0:
+8:0:0:
+9:0:0:
+10:0:0:

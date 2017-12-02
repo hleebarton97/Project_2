@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 /**
  * 
  * @author Lee
@@ -8,8 +6,11 @@ import java.util.ArrayList;
 
 public class Room 
 {
-	private String name;
-	private ArrayList<Item> items;
+	private String name; // Name of the room.
+	private Item item; // All items in the room that cna be picked up.
+	
+	private boolean locked; 	// Is the room locked or not?
+	private boolean hasEntered; // Has the player been to the room or not?
 	
 // Constructors:
 	
@@ -18,25 +19,35 @@ public class Room
 	 */
 	public Room()
 	{
-		this.items = new ArrayList<Item>();
+		this.item = new Item();
 		this.setName(null);
-	}
-	
-	public Room(String name)
-	{
-		this.items = new ArrayList<Item>();
-		this.setName(name);
+		this.locked = false;
+		this.hasEntered = false;
 	}
 	
 	/**
 	 * 
 	 * @param name
-	 * @param inventory
 	 */
-	public Room(String name, ArrayList<Item> items)
+	public Room(String name)
 	{
+		this.item = new Item();
 		this.setName(name);
-		this.setItems(items);
+		this.locked = false;
+		this.hasEntered = false;
+	}
+
+	/**
+	 * 
+	 * @param name
+	 * @param locked
+	 */
+	public Room(String name, boolean locked)
+	{
+		this.item = new Item();
+		this.setName(name);
+		this.setLocked(locked);
+		this.hasEntered = false;
 	}
 	
 	
@@ -55,24 +66,27 @@ public class Room
 	 * 
 	 * @return
 	 */
-	public ArrayList<Item> getItems()
+	public Item getItem()
 	{
-		return this.items;
+		return this.item;
 	}
 	
 	/**
 	 * 
-	 * @param name
 	 * @return
 	 */
-	public Item getItemWithName(String name)
+	public boolean isLocked()
 	{
-		for(Item item : this.items)
-		{
-			if(item.getName().equals(name))
-				return item;
-		}
-		return null;
+		return this.locked;
+	}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean hasEntered()
+	{
+		return this.hasEntered;
 	}
 
 	
@@ -91,29 +105,65 @@ public class Room
 	 * 
 	 * @param items
 	 */
-	public void setItems(ArrayList<Item> items)
+	public void setItem(Item item)
 	{
-		this.items = items;
+		this.item = item;
 	}
+	
+	/**
+	 * Set item's name after object creation.
+	 * 
+	 * @param name
+	 */
+	public void setItemName(String name)
+	{
+		this.item.setName(name);
+	}
+	
+	/**
+	 * Set item's type after object creation.
+	 * 
+	 * @param type
+	 */
+	public void setItemType(int type)
+	{
+		this.item.setType(type);
+	}
+	
+	/**
+	 * 
+	 * @param locked
+	 */
+	public void setLocked(boolean locked)
+	{
+		this.locked = locked;
+	}
+	
+	/**
+	 * 
+	 * @param hasEntered
+	 */
+	public void setHasEntered(boolean hasEntered)
+	{
+		this.hasEntered = hasEntered;
+	}
+
 	
 // Functions:
 	
 	/**
-	 * 
-	 * @param item
+	 * Lock the current room.
 	 */
-	public void addItem(Item item)
+	public void lock()
 	{
-		this.items.add(item);
+		this.locked = true;
 	}
 	
 	/**
-	 * 
-	 * @param name
+	 * Unlock the room when a key is used on it.
 	 */
-	public void addItem(String name)
+	public void unlock()
 	{
-		Item item = new Item(name);
-		this.items.add(item);
+		this.locked = false;
 	}
 }

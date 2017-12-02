@@ -1,9 +1,8 @@
 import java.awt.EventQueue;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class GameHandler 
+public class GameHandler
 {
 	private static final GameWindow WINDOW = new GameWindow();	// Create JFrame.
 	private static final Scene SCENE = new Scene(WINDOW.getInformationText());	// Create game scene.
@@ -36,6 +35,8 @@ public class GameHandler
 	 */
 	public static void createActionListeners()
 	{
+		
+		// Button listeners.
 		WINDOW.getBtnForward().addActionListener(new ActionListener() 
 		{
 
