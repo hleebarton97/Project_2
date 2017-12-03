@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.JButton;
 import javax.swing.JTextPane;
 
 public class Scene 
@@ -22,6 +23,7 @@ public class Scene
 	private BufferedImage scene; 	// Actual image of the scene.
 	
 	private Information info;	 	// The information provided for each scene.
+	private JButton btn_Use;
 	
 	private ArrayList<Room> rooms; 	// ArrayList of the 8 rooms.
 	
@@ -29,12 +31,13 @@ public class Scene
 	 * Constructor that doesn't take a node value and sets the scene
 	 * at the start.
 	 */
-	public Scene(JTextPane windowText)
+	public Scene(JTextPane windowText, JButton btn_Use)
 	{
 		this.setNode(0); 		 		// Default node position at 0.
 		this.setDirection(0);	 		// Default direction at 0.
 		this.setType(0);				// Default type of information.
 		this.info = new Information(windowText); // Create information object.
+		this.btn_Use = btn_Use; // Set button to change text.
 		this.createRooms(); // Create room objects.
 	}
 	
@@ -42,12 +45,13 @@ public class Scene
 	 * Constructor that takes in a node value and sets the scene.
 	 * @param node, dir, JTextPane
 	 */
-	public Scene(int node, int dir, JTextPane windowText)
+	public Scene(int node, int dir, JTextPane windowText, JButton btn_Use)
 	{
 		this.setNode(node);				// Set node position.
 		this.setDirection(dir);			// Set dir.
 		this.setType(0);				// Set type.
 		this.info = new Information(windowText); // Create information object.
+		this.btn_Use = btn_Use;			// Set button to change text.
 		this.createRooms(); // Create room objects.
 	}
 
@@ -98,6 +102,16 @@ public class Scene
 	public Information getInfo()
 	{
 		return this.info;
+	}
+	
+	/**
+	 * Get the use item button.
+	 * 
+	 * @return button
+	 */
+	public JButton getButton()
+	{
+		return this.btn_Use;
 	}
 
 	
@@ -158,6 +172,8 @@ public class Scene
 		if(node == 1) // Check NODE 1 type.
 		{
 			if(this.dir == 0 && this.getRoomByName("Hallway").hasEntered())
+				this.setType(1);
+			else if(this.dir == 1 && this.getRoomByName("Lounge").hasEntered())
 				this.setType(1);
 			else if(this.dir == 2 && this.getRoomByName("Study").hasEntered()) // Study is unlocked.
 				this.setType(1);
@@ -226,6 +242,10 @@ public class Scene
 		return null;
 	}
 	
+	/**
+	 * 
+	 * @return
+	 */
 	public Room getRoomByPosition()
 	{
 		if(this.node == 2)

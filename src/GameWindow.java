@@ -37,6 +37,7 @@ import net.miginfocom.swing.MigLayout;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 public class GameWindow {
 
@@ -56,7 +57,8 @@ public class GameWindow {
 		    btn_Forward,
 		    btn_Back,
 		    btn_Left,
-		    btn_Right;
+		    btn_Right,
+		    btn_Use;
 
 	/**
 	 * Create the application.
@@ -105,6 +107,11 @@ public class GameWindow {
 		lbl_Inventory.setHorizontalAlignment(SwingConstants.CENTER);
 		lbl_Inventory.setBounds(10, 0, 184, 30);
 		panel_Inventory.add(lbl_Inventory);
+		
+		this.btn_Use = new JButton("");
+		btn_Use.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btn_Use.setBounds(10, 31, 184, 186);
+		panel_Inventory.add(btn_Use);
 		
 		this.panel_Buttons = new JPanel();
 		panel_Buttons.setBounds(224, 322, 350, 228);
@@ -174,6 +181,7 @@ public class GameWindow {
 		
 		JLabel label_19 = new JLabel("");
 		panel_Buttons.add(label_19, "cell 4 4,grow");
+		
 		frame.setBounds(100, 100, 600, 600);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
@@ -279,6 +287,16 @@ public class GameWindow {
 	}
 	
 	/**
+	 * Gets the use button from the JFrame.
+	 * 
+	 * @return
+	 */
+	public JButton getBtnUse()
+	{
+		return this.btn_Use;
+	}
+	
+	/**
 	 * Sets the image of the current scene.
 	 * 
 	 * @param img
@@ -289,5 +307,4 @@ public class GameWindow {
 		this.bg.setIcon(new ImageIcon(img)); // Set the background of JLabel.
 		this.frame.getContentPane().add(bg); // Add JLabel to our game window.
 	}
-
 }

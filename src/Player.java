@@ -19,6 +19,8 @@ public class Player
     {
         this.items = new ArrayList<Item>();
         this.scene = scene;
+        
+        cheat();
     }
     
     /**
@@ -43,6 +45,39 @@ public class Player
     {
         return this.items;
     }
+    
+    /**
+     * Get item based on string value.
+     * 
+     * @param name
+     * @return
+     */
+    public Item getItemByName(String name)
+	{
+		for(Item item : this.items)
+		{
+			if(item.getName().equals(name))
+				return item;
+		}
+		return null;
+	}
+    
+    /**
+     * Return true or false if player has the item or not.
+     * 
+     * @param name
+     * @return
+     */
+    public boolean hasItem(String name)
+    {
+    	for(Item item : this.items)
+    	{
+    		if(item.getName().equals(name))
+    			return true;
+    	}
+    	return false;
+    }
+    
     
     
 // Setters:
@@ -93,7 +128,7 @@ public class Player
     	}
     	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 2) // NODE 3 FACING BALLROOM (RIGHT).
     	{
-    		if(!(this.scene.getRoomByName("Billiard Room").isLocked())) // If the room is unlocked.
+    		if(!(this.scene.getRoomByName("Ballroom").isLocked())) // If the room is unlocked.
     			this.scene.updateScene(5, 0);
     		else
     			this.scene.getInfo().writeInformation("The door is locked.");
@@ -219,6 +254,10 @@ public class Player
     		this.scene.updateScene(6, 2);
     	else if(this.scene.getNode() == 9 && this.scene.getDirection() == 0) // NODE 9 IN CONSERVATORY.
     		this.scene.updateScene(6, 0);
+    	else if(this.scene.getNode() == 1 && this.scene.getDirection() == 3)
+    		this.scene.updateScene(3, 3);
+    	else if(this.scene.getNode() == 3 && this.scene.getDirection() == 3)
+    		this.scene.updateScene(6, 3);
     	
     }
     
@@ -239,9 +278,95 @@ public class Player
 	    		// Add item to player's inventory.
 	    		this.items.add(room.getItem());
 	    		
+	    		// Tell user item has been picked up.
+	    		this.scene.getInfo().writeInformation("You picked up a " + room.getItem().getName());
+	    		
 	    		// Item has now been picked up.
 	    		room.getItem().setPickedUp(true);
+	    		
+	    		// Show item in inventory.
+	    		this.scene.getButton().setText(room.getItem().getName());
     		}
     	}
+    }
+    
+    
+    public void cheat()
+    {
+    	Room room = this.scene.getRoomByName("Conservatory");
+    	
+    	this.items.add(room.getItem());
+    	this.scene.getButton().setText(room.getItem().getName());
+    }
+    
+    /**
+     * Player uses appropriate item.
+     */
+    public void useItem()
+    {
+    	int node = this.scene.getNode();
+    	int dir = this.scene.getDirection();
+    	
+    	/**
+    	 * Each unlocks appropriate door,
+    	 * removes item from inventory,
+    	 * sets item from its origin to used,
+    	 * lets the player know an item was used,
+    	 * and then sets button text to blank again.
+    	 */
+    	if(node == 1 && dir == 2 && this.hasItem("Key")) // Facing the Study.
+    	{
+    		this.scene.getRoomByName("Study").unlock();
+    		this.items.remove(this.getItemByName("Key"));
+    		this.scene.getRoomByName("Lounge").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("Key has been used to unlock the door.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 3 && dir == 2 && this.hasItem("Note"))
+    	{
+    		this.scene.getRoomByName("Ballroom").unlock();
+    		this.items.remove(this.getItemByName("Note"));
+    		this.scene.getRoomByName("Study").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("Note has been used to unlock the door.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 3 && dir == 1 && this.hasItem("Fancy Key"))
+    	{
+    		this.scene.getRoomByName("Billiard Room").unlock();
+    		this.items.remove(this.getItemByName("Fancy Key"));
+    		this.scene.getRoomByName("Ballroom").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("Fancy Key has been used to unlock the door.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 6 && dir == 1 && this.hasItem("Candle"))
+    	{
+    		this.scene.getRoomByName("Library").unlock();
+    		this.items.remove(this.getItemByName("Candle"));
+    		this.scene.getRoomByName("Billiard Room").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("The Candle was used to light up the Library.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 6 && dir == 2 && this.hasItem("Button"))
+    	{
+    		this.scene.getRoomByName("Kitchen").unlock();
+    		this.items.remove(this.getItemByName("Button"));
+    		this.scene.getRoomByName("Library").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("The Button was used to unlock the door.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 6 && dir == 0 && this.hasItem("Master Key"))
+    	{
+    		this.scene.getRoomByName("Conservatory").unlock();
+    		this.items.remove(this.getItemByName("Master Key"));
+    		this.scene.getRoomByName("Kitchen").getItem().setUsed(true);
+    		this.scene.getInfo().writeInformation("Master Key was used to unlock the door.");
+    		this.scene.getButton().setText("");
+    	}
+    	else if(node == 1 && dir == 3 && this.hasItem("Lever"))
+    	{
+    		System.out.println("GAME OVER!");
+    		
+    	}
+    			
     }
 }

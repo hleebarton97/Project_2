@@ -10,14 +10,20 @@
  * @since 12/6/2017
  */
 
+import java.awt.Color;
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class GameHandler
 {
 	private static final GameWindow WINDOW = new GameWindow();	// Create JFrame.
-	private static final Scene SCENE = new Scene(WINDOW.getInformationText());	// Create game scene.
+	private static final Scene SCENE = new Scene(WINDOW.getInformationText(), WINDOW.getBtnUse());	// Create game scene.
 	private static final Player PLAYER = new Player(SCENE);	// Create player and pass the scene.
 	
 	/**
@@ -121,6 +127,43 @@ public class GameHandler
 				PLAYER.pickUp();
 			}
 			
+		});
+		
+		WINDOW.getBtnUse().addActionListener(new ActionListener()
+		{
+			/**
+			 * Use item.
+			 * 
+			 * End game if facing entrance and lever is picked up.
+			 */
+			@Override
+			public void actionPerformed(ActionEvent e)
+			{
+				if(PLAYER.hasItem("Lever") && SCENE.getNode() == 1 && SCENE.getDirection() == 3) // END GAME
+				{
+					// New JPanel:
+					JPanel end = new JPanel();
+					end.setBounds(0, 0, 600, 600);
+					
+					JLabel lbl_end = new JLabel();
+					lbl_end.setText("YOU ESCAPED!");
+					lbl_end.setFont(new Font("Tahoma", Font.PLAIN, 32));
+					
+					end.add(lbl_end);
+					
+					//JButton btn_restart = new JButton("");
+					//btn_restart.setText("Play Again?");
+					
+					WINDOW.getFrame().getContentPane().removeAll();
+					
+					WINDOW.getFrame().getContentPane().add(end);
+					
+					WINDOW.getFrame().getContentPane().revalidate();
+					WINDOW.getFrame().getContentPane().repaint();
+				}
+				else
+					PLAYER.useItem();
+			}
 		});
 	}
 }
