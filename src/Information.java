@@ -1,8 +1,16 @@
 /**
- * Information class requires a text pane and handles the information
- * being written to the player.
- * 
- * This allows the lore of the game to be created.
+ * Information Class
+ * The Information class uses a JTextPane to handle information
+ * that is to be displayed to the viewer. This is what creates
+ * the lore of the game.
+ * fields:
+ * 	infoPane: A JTextPane object used to hold and display information to the Player.
+ * Information class reads from the src/assets/info/info.dat file
+ * Date: 02 December 2017
+ * OOP Project 2: The Mansion
+ * @author Team 7
+ * @version 1.0
+ * @since 1.0
  */
 
 import java.io.File;
@@ -16,21 +24,22 @@ public class Information
 	private JTextPane infoPane;	// Our JTextPane to write information to.
     
 	/**
-	 * Constructor must accept a JTextPane object.
-	 * @param infoPane
+	 * This constructor accepts a JTextPane object and uses it to
+	 * set the information to be displayed in the JTextPane 
+	 * @param infoPane The JTextPane whose information is to be updated.
 	 */
     public Information(JTextPane infoPane)
     {
-        this.setInformationPanel(infoPane); // Set the current JTextPane to JFrame.
+        this.setInformationPanel(infoPane); // add the current JTextPane to the JFrame.
         this.updateInformation(0, 0, 0); 	// Start of game information.
     }
     
     
-// Setter:
-    
+    // Setter:
     /**
-     * Sets the JTextPane to the passed in JTextPane to write information to.
-     * @param infoPane
+     * The setInformationPanel method sets the copies the infoPane
+     * parameter and stores it in the infoPane field.
+     * @param infoPane The JTextPane to be copied into the infoPane field.
      */
     public void setInformationPanel(JTextPane infoPane)
     {
@@ -38,11 +47,10 @@ public class Information
     }
     
 
-// Getter:
-    
+    // Getter:
     /**
-     * Gets the current JTextPane.
-     * @return
+     * The getInformationPanel gets the current JTextPane.
+     * @return A reference to the JTextPane in the infoPane field.
      */
     public JTextPane getInformationPanel()
     {
@@ -50,11 +58,11 @@ public class Information
     }
     
 
-// Functions:
-    
+    // Functions:
     /**
-     * Write the string passed in to the current JTextPane.
-     * @param info
+     * The writeInformation method sets the text in the JTextPane
+     * referenced by infoPane.
+     * @param info The text to be set in infoPane.
      */
     public void writeInformation(String info)
     {
@@ -62,13 +70,13 @@ public class Information
     }
     
     /**
-     * Reads the information from the file based on the player's 
-     * postion and direction they are facing.
-     * 
-     * It then writes the appropriate information to the JTextPane.
-     * 
-     * @param node
-     * @param dir
+     * The getInformationFromFile method reads the information from the 
+     * file based on the Player's position and direction they are facing.
+     * It then writes the appropriate information to the JTextPane referenced
+     * by the infoPane field.
+     * @param node The value that indicates the scene the Player is currently on.
+     * @param dir The value that indicates the Player's direction.
+     * @param type The value that determines the information to be displayed.
      */
     public String getInformationFromFile(int node, int dir, int type)
     {
@@ -114,9 +122,12 @@ public class Information
     }
     
     /**
-     * Update information pane based on node, direction, and type.
-     * @param node
-     * @param dir
+     * The updateInformation method updates the text that is displayed
+     * to the Player based on the Player's node and direction values
+     * as well as the information type.
+     * @param node The value that indicates the scene the Player is currently on.
+     * @param dir The value that indicates the Player's direction.
+     * @param type The value that determines the information to be displayed.
      */
     public void updateInformation(int node, int dir, int type)
     {
