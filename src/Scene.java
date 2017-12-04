@@ -1,10 +1,21 @@
 /**
+ * Scene Class
  * The Scene class keeps track of the player's position (node)
  * and the direction they are facing (dir).
- * 
  * This class also loads the images based on the player's position
  * and direction and is used to update them into the game.
- *
+ * fields:
+ * 	btn_Use: A JButton that changes the text that is displayed to the Player.
+ * 	dir: An integer value between 0 and 3 that determines the direction the Player is facing.
+ * 	info: An Information object that is used to store and display information about each scene.
+ * 	node: An integer value between 0 and 10 that represents which scene the player is currently on.
+ * 	rooms: An ArrayList of Room objects to hold the 8 rooms that the player can navigate through.
+ * 	scene: A Scene object to be displayed to the Player.
+ * 	type: An integer value that indicates the type of information being displayed.
+ * Scene Class uses the src/assets/img file to get images for the Room objects.
+ * Date: 02 December 2017
+ * OOP Project 2: The Mansions
+ * @author Team 7
  */
 
 import java.awt.image.BufferedImage;
@@ -23,13 +34,17 @@ public class Scene
 	private BufferedImage scene; 	// Actual image of the scene.
 	
 	private Information info;	 	// The information provided for each scene.
-	private JButton btn_Use;
+	private JButton btn_Use;		// changes the text that is displayed to the Player
 	
 	private ArrayList<Room> rooms; 	// ArrayList of the 8 rooms.
 	
 	/**
-	 * Constructor that doesn't take a node value and sets the scene
+	 * This constructor doesn't take a node value and sets the scene
 	 * at the start.
+	 * @param windowText A reference to the JTextPane. The String value
+	 * 			in it will be used to create an Information object.
+	 * @param btn_Use A reference to the JButton to be copied into the
+	 * 			btn_Use field.
 	 */
 	public Scene(JTextPane windowText, JButton btn_Use)
 	{
@@ -42,8 +57,15 @@ public class Scene
 	}
 	
 	/**
-	 * Constructor that takes in a node value and sets the scene.
-	 * @param node, dir, JTextPane
+	 * This constructor takes in a node value and sets the scene.
+	 * @param node Value that represents which scene the player is on.
+	 * 			store the value in the node field.
+	 * @param dir Value that represents the direction the player is facing.
+	 * 			store it in the dir field.
+	 * @param windowText A reference to the JTextPane. The String value
+	 * 			in it will be used to create an Information object.
+	 * @param btn_Use A reference to the JButton to be copied into the
+	 * 			btn_Use field.
 	 */
 	public Scene(int node, int dir, JTextPane windowText, JButton btn_Use)
 	{
@@ -56,8 +78,7 @@ public class Scene
 	}
 
 	
-// Getters
-	
+	// Getters
 	/**
 	 * Get the current value of the node.
 	 * @return value of node.
@@ -78,7 +99,8 @@ public class Scene
 	
 	/**
 	 * Get the current type of information that is being displayed.
-	 * @return
+	 * @return the integer value used to determine the type of information
+	 * 			being displayed.
 	 */
 	public int getType()
 	{
@@ -96,8 +118,7 @@ public class Scene
 	
 	/**
 	 * Get the information of the scene.
-	 * 
-	 * @return information
+	 * @return A reference to the Information object.
 	 */
 	public Information getInfo()
 	{
@@ -106,8 +127,7 @@ public class Scene
 	
 	/**
 	 * Get the use item button.
-	 * 
-	 * @return button
+	 * @return A reference to the use item JButton
 	 */
 	public JButton getButton()
 	{
@@ -116,7 +136,6 @@ public class Scene
 
 	
 // Setters
-	
 	/**
 	 * Set the value of node.
 	 * @param node -- Value of scene that the player is on.
@@ -139,7 +158,7 @@ public class Scene
 	
 	/**
 	 * Set the value of type.
-	 * @param type
+	 * @param type The type of information
 	 */
 	public void setType(int type)
 	{
@@ -148,8 +167,8 @@ public class Scene
 	
 	/**
 	 * Update player's current direction and position.
-	 * @param node
-	 * @param dir
+	 * @param node The scene the player is currently on.
+	 * @param dir The direction the player is facing.
 	 */
 	public void updateScene(int node, int dir)
 	{
@@ -161,11 +180,14 @@ public class Scene
 	}
 
 // Functions
-	
 	/**
-	 * Set the appropriate information based on multiple variables.
-	 * @param node
-	 * @param dir
+	 * The setInfomation method uses the node and player direction values to
+	 * determine the appropriate information that should be set for the Room
+	 * objects.
+	 * @param node Value that represents which scene the player is on.
+	 * 			Used to determine the type of information to be set on a Room.
+	 * @param dir Value that represents the direction the player is facing.
+	 * 			Used to determine the type of information to be set on a Room.
 	 */
 	public void setInformation(int node, int dir)
 	{
@@ -228,9 +250,11 @@ public class Scene
 	}
 	
 	/**
-	 * 
-	 * @param name
-	 * @return
+	 * The getRoomByName method searches the ArrayList of Room objects
+	 * to find a Room whose value in its name field matches the name parameter.
+	 * @param name The name of the Room to be searched for.
+	 * @return The Room object whose name field matches the value in the
+	 * 			name parameter. Otherwise, null.
 	 */
 	public Room getRoomByName(String name)
 	{
@@ -243,8 +267,9 @@ public class Scene
 	}
 	
 	/**
-	 * 
-	 * @return
+	 * The getRoomByPosition method uses the node value to
+	 * determine which Room object to return
+	 * @return The Room object whose node value is indicated below.
 	 */
 	public Room getRoomByPosition()
 	{
@@ -267,8 +292,11 @@ public class Scene
 	}
 	
 	/**
-	 * 
-	 * @param node
+	 * The updateRoom method uses the node value to determine
+	 * if a player has entered a room. If so, then we call
+	 * setHasEntered method and pass it true to indicate
+	 * that the player has entered the room.
+	 * @param node The value that indicates the Player's current scene.
 	 */
 	public void updateRoom(int node)
 	{
@@ -292,7 +320,7 @@ public class Scene
 	}
 	
 	/**
-	 * Create the rooms and add the items within the rooms.
+	 * The createRooms method creates the rooms and adds the Items to the rooms.
 	 */
 	public void createRooms()
 	{
@@ -343,14 +371,19 @@ public class Scene
 		
 	}
 	
+	/**
+	 * The printNodeDir method displays the Players position (scene value)
+	 * and direction.
+	 */
 	public void printNodeDir()
 	{
 		System.out.println("Position: " + this.node + ", Dir: " + this.dir);
 	}
 	
 	/**
-	 * Load an image and set this.scene to the loaded image
-	 * based on the player's position (this.node).
+	 * The loadImage method uses the src/assets/img file to load
+	 * an image and set the scene to the loaded image based on 
+	 * the player's position (this.node).
 	 */
 	private void loadImage()
 	{
@@ -615,5 +648,4 @@ public class Scene
 			}
 		}
 	}
-	
 }
