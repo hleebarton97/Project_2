@@ -6,7 +6,8 @@
  * 	pickedUp: A boolean value to determine if the Item has been picked up by the player.
  * 	type: An integer value that determines what Node the item is used on.
  *  Date: 02 December 2017
- * @author Lee
+ * OOP Project 2: The Mansion
+ * @author Team 7
  */
 
 public class Item 
