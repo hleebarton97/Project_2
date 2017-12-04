@@ -1,5 +1,12 @@
 /**
- * 
+ * Player Class
+ * The Player class contains the fields and methods needed for the player character
+ * to navigate through the mansion and interact with Item objects.
+ * Fields:
+ * 	items: An ArrayList of Items to represent the Items in the player's inventory.
+ * 	scene: A Scene object used to hold the image that the player should currently  be viewing.
+ * Date: 02 December 2017
+ * OOP Project 2: The Mansion
  * @author Lee
  *
  */
@@ -10,10 +17,11 @@ public class Player
 {
 	private ArrayList<Item> items;	// Items in player's inventory.
 	private Scene scene;	// Scene player is current on.
-    
+
 	/**
-	 * 
-	 * @param scene
+	 * This constructor accepts a Scene object as its argument.
+	 * It sets the scene and creates an ArrayList of Items.
+	 * @param scene The scene to store in the scene field.
 	 */
     public Player(Scene scene)
     {
@@ -22,11 +30,13 @@ public class Player
         
         cheat();
     }
-    
+
     /**
-     * 
-     * @param items
-     * @param scene
+     * This constructor accepts a Scene and an ArrayList of
+     * Item objects as its arguments. 
+     * @param items The ArrayList of items to be copied into
+     * 			the items field.
+     * @param scene The scene to store in the scene field.
      */
     public Player(ArrayList<Item> items, Scene scene)
     {
@@ -35,11 +45,10 @@ public class Player
     }
 
     
-// Getters: 
-    
+    // Getters: 
     /**
-     * 
-     * @return
+     * The getItems method returns the ArrayList of Items.
+     * @return An ArrayList of Item objects
      */
     public ArrayList<Item> getItems()
     {
@@ -47,10 +56,11 @@ public class Player
     }
     
     /**
-     * Get item based on string value.
-     * 
-     * @param name
-     * @return
+     * The getItemByName method searches through the item ArrayList
+     * and returns the item whose name matches the value in the name
+     * parameter.
+     * @param name The name of the Item to be searched for.
+     * @return The Item object, if it exists. Otherwise, null.
      */
     public Item getItemByName(String name)
 	{
@@ -63,10 +73,11 @@ public class Player
 	}
     
     /**
-     * Return true or false if player has the item or not.
-     * 
-     * @param name
-     * @return
+     * The hasItem method searches through the Player's
+     * ArrayList of Item objects and determines if the player
+     * has the Item specified by the name parameter.
+     * @param name The name of the Item object to be searched for.
+     * @return True if found. Otherwise, false.
      */
     public boolean hasItem(String name)
     {
@@ -80,11 +91,11 @@ public class Player
     
     
     
-// Setters:
-    
+    // Setters:
     /**
-     * 
-     * @param items
+     * The setItems method copies the ArrayList of Item objects
+     * passed to its parameter.
+     * @param items The ArrayList of Item objects to be copied.
      */
     public void setItems(ArrayList<Item> items)
     {
@@ -92,10 +103,11 @@ public class Player
     }
     
     
-// Actions:
-    
+    // Actions: Used to move the Player through the mansion and to interact with Item objects.
     /**
-     * Player moves forward based on current position and direction.
+     * The moveForward method moves the Player forward based on current position and direction.
+     * The node value determines the Player's current scene/orientation. This value is used to 
+     * determine the scene that will be displayed next when the player moves forward.
      */
     public void moveForward()
     {
@@ -162,7 +174,9 @@ public class Player
     }
     
     /**
-     * Player turns left based on current position and direction.
+     * The turnLeft method turns the Player left based on current position and direction.
+     * The node value determines the Player's current scene/orientation. This value is used to 
+     * determine the scene that will be displayed next when the player turns left.
      */
     public void turnLeft()
     {
@@ -196,7 +210,9 @@ public class Player
     }
     
     /**
-     * Player turns right based on current position and direction.
+     * The turnRight method turns the Player right based on current position and direction.
+     * The node value determines the Player's current scene/orientation. This value is used to 
+     * determine the scene that will be displayed next when the player turns right.
      */
     public void turnRight()
     {
@@ -230,7 +246,9 @@ public class Player
     }
     
     /**
-     * Player moves back based on current position and direction.
+     * The moveBack method moves the Player back based on current position and direction.
+     * The node value determines the Player's current scene/orientation. This value is used to 
+     * determine the scene that will be displayed next when the player moves back.
      */
     public void moveBack()
     {
@@ -262,7 +280,9 @@ public class Player
     }
     
     /**
-     * Player picks up item if item exists.
+     * The pickUp method allows a Player to pick up an Item object and place it
+     * in their inventory. A player may pick up an Item object and place it in
+     * their inventory if they do not already have that item.
      */
     public void pickUp()
     {
@@ -290,7 +310,10 @@ public class Player
     	}
     }
     
-    
+    /**
+     * The cheat method gets an Item object into the Player's inventory
+     * without them having to find it the normal way.
+     */
     public void cheat()
     {
     	Room room = this.scene.getRoomByName("Conservatory");
@@ -300,7 +323,8 @@ public class Player
     }
     
     /**
-     * Player uses appropriate item.
+     * The useItem method uses the current scene nodes and the Player's Item inventory
+     * to use the correct Item object on the scene.
      */
     public void useItem()
     {
@@ -366,7 +390,6 @@ public class Player
     	{
     		System.out.println("GAME OVER!");
     		
-    	}
-    			
+    	}	
     }
 }
