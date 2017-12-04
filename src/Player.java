@@ -7,7 +7,7 @@
  * 	scene: A Scene object used to hold the image that the player should currently  be viewing.
  * Date: 02 December 2017
  * OOP Project 2: The Mansion
- * @author Lee
+ * @author Team 7
  *
  */
 
