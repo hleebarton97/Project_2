@@ -1,7 +1,12 @@
 /**
- * 
+ * Item class
+ * The Item class contains fields and methods needed to realize an in game Item.
+ * Fields:
+ * 	name: A String containing the Item name to be displayed.
+ * 	pickedUp: A boolean value to determine if the Item has been picked up by the player.
+ * 	type: An integer value that determines what Node the item is used on.
+ *  Date: 02 December 2017
  * @author Lee
- *
  */
 
 public class Item 
@@ -24,9 +29,8 @@ public class Item
 	
 	/**
 	 * Item creation with name and type already known.
-	 * 
-	 * @param name
-	 * @param type
+	 * @param name The name of the item.
+	 * @param type The type of the item.
 	 */
 	public Item(String name, int type)
 	{
@@ -37,8 +41,7 @@ public class Item
 	}
 
 
-// Getters:
-	
+	// Getters:
 	public String getName()
 	{
 		return this.name;
@@ -60,8 +63,7 @@ public class Item
 	}
 
 
-// Setters:	
-	
+	// Setters:	
 	public void setName(String name)
 	{
 		this.name = name;
@@ -81,6 +83,4 @@ public class Item
 	{
 		this.pickedUp = pickedUp;
 	}
-	
-// Functions:
 }
