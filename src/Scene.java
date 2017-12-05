@@ -16,6 +16,8 @@
  * Date: 02 December 2017
  * OOP Project 2: The Mansions
  * @author Team 7
+ * @version 1.0
+ * @since 1.0
  */
 
 import java.awt.image.BufferedImage;
