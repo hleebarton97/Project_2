@@ -1,6 +1,26 @@
 /**
- * 
- *
+ * GameWindow Class
+ * The GameWindow class creates the GUI that allows a user to navigate through
+ * the game with a Player character and interact with Item objects.
+ * fields:
+ * 	bg: A JLabel object that is used to hold the scene attributes.
+ * 	btn_Back: A JButton object that is used to hold the attributes that represent a "Back" button in the game.
+ * 	btn_Forward: A JButton object that is used to hold the attributes that represent a "Forward" button in the game.
+ * 	btn_Left: A JButton object that is used to hold the attributes that represent a "Turn Left" button in the game.
+ * 	btn_Pickup: A JButton object that is used to hold the attributes that represent a "Pickup Item" button in the game.
+ * 	btn_Right: A JButton object that is used to hold the attributes that represent a "Turn Right" button in the game.
+ * 	btn_Use: A JButton object that is used to hold the attributes that represent a "Use Item" button in the game.
+ * 	frame: A JFram object used to hold the GUI components
+ * 	ii: An ImageIcon object used to hold a scene image
+ * 	panel_Buttons: A JPanel object used to hold all JButtons
+ * 	panel_Information: A JPanel object used to hold the information that will be displayed to the Player.
+ * 	panel_Inventory: A JPanel object used to hold a Player's Inventory
+ * 	txt_Information: A JtextPane object used to hold information that corresponds to the lore of the game.
+ * Date: 02 December 2017
+ * OOP Project 2: The Mansion
+ * @author Team 7
+ * @version 1.0
+ * @since 1.0
  */
 
 import java.awt.EventQueue;
@@ -41,18 +61,18 @@ import java.awt.Font;
 
 public class GameWindow {
 
-	private JFrame frame;
+	private JFrame frame; // to hold the GUI components
 	
-	private JLabel bg;
-	private ImageIcon ii;
+	private JLabel bg; // to hold the attributes of a scene
+	private ImageIcon ii; // to hold an image for a scene
 	
-	private JPanel panel_Information, 
-		   panel_Inventory, 
-		   panel_Buttons;
+	private JPanel panel_Information, // to hold the information to be displayed to the Player
+		   panel_Inventory, // to hold a Player's inventory of Items
+		   panel_Buttons; // to hold the JButtons
 	
-	private JTextPane txt_Information;
+	private JTextPane txt_Information; // to hold information regarding the lore of the game.
 	
-	
+	// these buttons are used to allow the Player to move and interact within the game.
 	private JButton btn_PickUp,
 		    btn_Forward,
 		    btn_Back,
@@ -61,7 +81,8 @@ public class GameWindow {
 		    btn_Use;
 
 	/**
-	 * Create the application.
+	 * The constructor calls the initialize method which
+	 * in turn creates the GUI.
 	 */
 	public GameWindow() 
 	{
@@ -69,7 +90,9 @@ public class GameWindow {
 	}
 
 	/**
-	 * Initialize the contents of the frame.
+	 * The initialize method creates the required JPanels, JTextPane,
+	 * JButtons, JLabel, and ImageIcon that are used in the GUI and
+	 * adds them to the JFrame.
 	 */
 	private void initialize() 
 	{
@@ -187,119 +210,71 @@ public class GameWindow {
 	}
 
 	
-// JFrame Getter
-	/**
-	 * 
-	 * @return
-	 */
+	// JFrame Getter
 	public JFrame getFrame()
 	{
 		return this.frame;
 	}
 	
 	
-// JPanel Getters
-	
-	/**
-	 * 
-	 * @return
-	 */
+	// JPanel Getters
 	public JPanel getInformationPanel()
 	{
 		return this.panel_Information;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
+
 	public JPanel getInventoryPanel()
 	{
 		return this.panel_Inventory;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public JPanel getButtonPanel()
 	{
 		return this.panel_Buttons;
 	}
 	
 	
-// JTextPane Getter
-	/**
-	 * 
-	 * @return
-	 */
+	// JTextPane Getter
 	public JTextPane getInformationText()
 	{
 		return this.txt_Information;
 	}
 	
 	
-// JButton Getters
-	/**
-	 * 
-	 * @return
-	 */
+	// JButton Getters
 	public JButton getBtnPickUp()
 	{
 		return this.btn_PickUp;
 	}
 	
-	/**
-	 * 
-	 * @return
-	 */
 	public JButton getBtnForward()
 	{
 		return this.btn_Forward;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
+
 	public JButton getBtnLeft()
 	{
 		return this.btn_Left;
 	}
-	
-	/**
-	 * 
-	 * @return
-	 */
+
 	public JButton getBtnRight()
 	{
 		return this.btn_Right;
 	}
-	
-	/**
-	 * Gets the back button from the JFrame.
-	 * 
-	 * @return
-	 */
+
 	public JButton getBtnBack()
 	{
 		return this.btn_Back;
 	}
-	
-	/**
-	 * Gets the use button from the JFrame.
-	 * 
-	 * @return
-	 */
+
 	public JButton getBtnUse()
 	{
 		return this.btn_Use;
 	}
 	
 	/**
-	 * Sets the image of the current scene.
-	 * 
-	 * @param img
+	 * The setSceneImage method sets the image of the current scene.
+	 * @param img The image to be added to the ImageIcon
 	 */
 	public void setSceneImage(BufferedImage img)
 	{
