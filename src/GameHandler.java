@@ -1,13 +1,17 @@
 /**
- * Game Handler class contains the main method.
- * 
- * This class creates the JFrame game window that contains all the window components.
- * Creates the scene and player, which takes the game scene.
- * 
+ * GameHandler Class
+ * The GameHandler class contains the main method.
+ * GameHandler class creates the JFrame game window that contains all the window components.
+ * GameHandler class Creates the scene and player, which takes the game scene.
  * All button actions are handled here.
- * 
- * @authors Henry Lee Barton III, Jake Garcia, Lupe Garcia, Ryan Hallberg
- * @since 12/6/2017
+ * variables:
+ * 	WINDOW: A GameWindow object used to create the GUI.
+ * 	SCENE: A Scene object used to create the game scene that the Player is in.
+ * 	PLAYER: The Player object that navigates through the game.
+ * Date: 02 December 2017
+ * @authors Team 7
+ * @version 1.0
+ * @since 1.0
  */
 
 import java.awt.Color;
